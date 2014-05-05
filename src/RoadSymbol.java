@@ -4,18 +4,18 @@
 abstract class RoadSymbol {
 
   int symbol; // 0 = end, 1 = segment, 2 = turn
-  int[] position; // position in x, y coordinates
-  int[] direction; // normalized 2D vector
+  Vec2 position; // position in x, y coordinates
+  Vec2 direction; // normalized 2D vector
 
   public int getType() {
     return symbol;
   }
 
-  public int[] getPosition() {
+  public Vec2 getPosition() {
     return position;
   }
 
-  public int[] getDirection() {
+  public Vec2 getDirection() {
     return direction;
   }
 

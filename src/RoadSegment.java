@@ -3,7 +3,7 @@
  */
 public class RoadSegment extends RoadSymbol {
 
-  public RoadSegment(int[] p, int[] d) {
+  public RoadSegment(Vec2 p, Vec2 d) {
     this.symbol = 1;
     this.position = p;
     this.direction = d;
@@ -11,6 +11,9 @@ public class RoadSegment extends RoadSymbol {
 
   @Override
   public RoadSymbol[] nextRoadSymbol() {
+
+    // TODO - Finish the implementation.
+
     return null;
   }
 }
