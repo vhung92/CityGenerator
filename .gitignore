@@ -52,14 +52,14 @@ out/
 log/
 target/
 
-# ============ #
-#java specific #
-# ============ #
+# ============= #
+# java specific #
+# ============= #
 *.class
 
-# ============================= #
-#netbeans ignore personal stuff # 
-# ============================= #
+# ============================== #
+# netbeans ignore personal stuff # 
+# ============================== #
 nbproject/private/
 
 # ======================= #
