@@ -4,34 +4,26 @@
 public class RoadNode {
 
   Vec2 position;
-  RoadEdge source;
-  RoadEdge destination;
-
-  public RoadNode(RoadEdge src, RoadEdge dest) {
-    this.source = src;
-    this.destination = dest;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (obj == this)
-      return true;
-    else if (obj == null)
-      return false;
-    else if (!(obj instanceof RoadNode))
-      return false;
-
-    RoadNode other = (RoadNode) obj;
-    if(source.equals(other.source) && destination.equals(other.destination)){
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
 
   public RoadNode(Vec2 position) {
     this.position = position;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    RoadNode roadNode = (RoadNode) o;
+
+    if (!position.equals(roadNode.position)) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    return position.hashCode();
   }
 
   public void setPosition(Vec2 position) {
@@ -42,7 +34,4 @@ public class RoadNode {
     return position;
   }
 
-  public void setSource(RoadEdge src){ this.source = src; }
-
-  public void setDestination(RoadEdge dest){ this.destination = dest; }
 }

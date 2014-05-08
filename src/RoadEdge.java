@@ -19,6 +19,26 @@ public class RoadEdge {
     this.width = setWidth(type);
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    RoadEdge roadEdge = (RoadEdge) o;
+
+    if (!from.equals(roadEdge.from)) return false;
+    if (!to.equals(roadEdge.to)) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = from.hashCode();
+    result = 31 * result + to.hashCode();
+    return result;
+  }
+
   public Vec2 calcDirection(Vec2 from, Vec2 to){
     double x = from.x - to.x;
     double y = from.y - to.y;
