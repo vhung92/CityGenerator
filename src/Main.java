@@ -1,5 +1,8 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by mac on 2014-05-05.
@@ -14,5 +17,15 @@ public class Main {
     BufferedImage heightMap = ImageHandler.loadImg(IMG_GEOGRAPHY);
     BufferedImage populationMap = ImageHandler.loadImg(IMG_POPULATION);
     BufferedImage roadMap = roadGenerator.generateRoad(heightMap, populationMap);
+
+    roadMap = roadGenerator.testCreateRoadImage(100);
+
+
+    // Write the image to disk
+    try {
+      ImageIO.write(roadMap, "JPEG", new File("maps/roads.jpg"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

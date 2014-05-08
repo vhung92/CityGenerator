@@ -64,4 +64,20 @@ public class RoadEdge {
     return s;
   }
 
+  public TYPE getType() {
+    return type;
+  }
+
+  public Vec2 getFrom() {
+    return from;
+  }
+
+  public Vec2 getTo() {
+    return to;
+  }
+
+  public Vec2 getDirection() {
+    return direction;
+  }
+
 }
