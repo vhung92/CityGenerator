@@ -4,8 +4,12 @@
 public class RoadNode {
 
   Vec2 position;
+  RoadEdge source;
+  RoadEdge destination;
 
-  public RoadNode() {
+  public RoadNode(RoadEdge src, RoadEdge dest) {
+    this.source = src;
+    this.destination = dest;
   }
 
   public RoadNode(Vec2 position) {
@@ -19,4 +23,8 @@ public class RoadNode {
   public Vec2 getPosition() {
     return position;
   }
+
+  public void setSource(RoadEdge src){ this.source = src; }
+
+  public void setDestination(RoadEdge dest){ this.destination = dest; }
 }
