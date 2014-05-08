@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -10,7 +11,7 @@ public class RoadGenerator {
   private final double SEGMENT_LENGTH = 100.0d; // in pixels
   private final double L_STREET_MIN_DISTANCE = 100.0d; // in pixels
   private final double M_STREET_MIN_DISTANCE = 100.0d; // in pixels
-  private final double S__STREET_MIN_DISTANCE = 25.0d; // in pixels
+  private final double S_STREET_MIN_DISTANCE = 25.0d; // in pixels
   private final double L_SYSTEM_SEED = 1.0d;
 
   public RoadGenerator() {
@@ -50,7 +51,7 @@ public class RoadGenerator {
     }
 
     // Variable storing all road segments
-    HashMap<Vec2, RoadSegment> roadSegments = generateRoadSegments(L_SYSTEM_SEED, geography, population);
+    HashMap<Vec2, RoadSymbol> roadSegments = generateRoadSegments(L_SYSTEM_SEED, geography, population);
 
     // Draw an image given the set of RoadSegments
     BufferedImage roadMap = drawRoadMap(width, height, roadSegments);
@@ -78,6 +79,49 @@ public class RoadGenerator {
     // Create medium roads, that cannot be too close to each other
 
     // Create small roads, to fill the rest
+
+
+    ArrayList<RoadNode> roadNodes = new ArrayList<RoadNode>();
+
+    int maxCityArea = 10;
+
+    boolean foundPopulation = false;
+    for(int y = 0; y < population.length; y++) {
+      for(int x = 0; x < population[y].length; x++) {
+        if(population[y][x] > 0) {
+
+          System.out.println("Found a population. X: " + x + " Y: " + y);
+
+          boolean alreadyFoundCity = false;
+
+          for(int yPopulation = y; yPopulation >= 0 && yPopulation > (y - maxCityArea); yPopulation--) {
+            for(int xPopulation = x; xPopulation >= 0 && xPopulation > (x - maxCityArea); xPopulation--) {
+              if(population[yPopulation][xPopulation] > 0) {
+                alreadyFoundCity = true;
+                break;
+              }
+            }
+            if(alreadyFoundCity) {
+              break;
+            }
+          }
+
+          if(!alreadyFoundCity) {
+            roadNodes.add(new RoadNode(new Vec2(x, y)));
+          }
+        }
+      }
+    }
+
+
+
+    System.out.println(roadNodes.size());
+
+
+
+
+
+
 
     return roadSegments;
   }
