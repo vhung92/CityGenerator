@@ -12,6 +12,24 @@ public class RoadNode {
     this.destination = dest;
   }
 
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this)
+      return true;
+    else if (obj == null)
+      return false;
+    else if (!(obj instanceof RoadNode))
+      return false;
+
+    RoadNode other = (RoadNode) obj;
+    if(source.equals(other.source) && destination.equals(other.destination)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   public RoadNode(Vec2 position) {
     this.position = position;
   }
