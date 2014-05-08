@@ -1,7 +1,7 @@
 import java.awt.*;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * Created by mac on 2014-05-05.
@@ -13,6 +13,10 @@ public class RoadGenerator {
   private final double M_STREET_MIN_DISTANCE = 100.0d; // in pixels
   private final double S_STREET_MIN_DISTANCE = 25.0d; // in pixels
   private final double L_SYSTEM_SEED = 1.0d;
+
+  private final int ROAD_WIDTH_WIDE = 10;
+  private final int ROAD_WIDTH_NORMAL = 8;
+  private final int ROAD_WIDTH_NARROW = 5;
 
   public RoadGenerator() {
   }
@@ -51,12 +55,11 @@ public class RoadGenerator {
     }
 
     // Variable storing all road segments
-    HashMap<Vec2, RoadSymbol> roadSegments = generateRoadSegments(L_SYSTEM_SEED, geography, population);
+    generateRoadSegments(L_SYSTEM_SEED, geography, population);
 
     // Draw an image given the set of RoadSegments
-    BufferedImage roadMap = drawRoadMap(width, height, roadSegments);
 
-    return roadMap;
+    return null;
   }
 
   /**
@@ -66,9 +69,9 @@ public class RoadGenerator {
    * @param population The population map storing all locations of high population density.
    * @return A map, mapping pixel coordinates to a RoadSegments.
    */
-  private HashMap<Vec2, RoadSegment> generateRoadSegments(double seed, int[][] geography, int[][] population) {
+  private Set<RoadEdge> generateRoadSegments(double seed, int[][] geography, int[][] population) {
 
-    HashMap<Vec2, RoadSegment> roadSegments = new HashMap<Vec2, RoadSegment>();
+    Set<RoadEdge> roads = new HashSet<RoadEdge>();
 
     // TODO - Finish the implementation.
 
@@ -123,22 +126,77 @@ public class RoadGenerator {
 
 
 
-    return roadSegments;
+    return roads;
+  }
+
+  /**
+   * Returns an image of a road network, given a set of roads to draw.
+   * @param width The width of the image.
+   * @param height The height of the image.
+   * @param roads The set of roads to be drawn.
+   * @return The road network image.
+   */
+  private BufferedImage createRoadImage(int width, int height, Set<RoadEdge> roads) {
+
+    Color bgColor = Color.WHITE;
+    Color roadColor = Color.BLACK;
+
+    BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+    Graphics2D g = img.createGraphics();
+    g.setColor(bgColor);
+    g.fillRect(0, 0, width, height);
+    g.setColor(roadColor);
+
+    for(RoadEdge road : roads) {
+
+      switch (road.getType()) {
+        case WIDE:
+          g.setStroke(new BasicStroke(ROAD_WIDTH_WIDE));
+          break;
+        case NORMAL:
+          g.setStroke(new BasicStroke(ROAD_WIDTH_NORMAL));
+          break;
+        case NARROW:
+          g.setStroke(new BasicStroke(ROAD_WIDTH_NARROW));
+          break;
+        default:
+          break;
+      }
+
+      Vec2 from = road.getFrom();
+      Vec2 to = road.getTo();
+
+      g.draw(new Line2D.Double(from.x, from.y, to.x, to.y));
+    }
+
+    return img;
   }
 
 
-  /**
-   * Create an image representation of the roads.
-   * @param width The width of the image.
-   * @param height The height of the image.
-   * @param roadSegments The roads to be drawn.
-   * @return An image representation of the roads.
-   */
-  private BufferedImage drawRoadMap(int width, int height, HashMap<Vec2, RoadSegment> roadSegments) {
+  public BufferedImage testCreateRoadImage (int numRoads) {
+    int width = 512;
+    int height = 512;
 
-    // TODO - Finish the implementation.
+    Set<RoadEdge> roads = new HashSet<RoadEdge>();
 
-    return null;
+    Random rand = new Random(System.currentTimeMillis());
+    for(int i = 0; i < numRoads; i++)  {
+      Vec2 from = new Vec2(rand.nextInt(width), rand.nextInt(height));
+      Vec2 to = new Vec2(rand.nextInt(width), rand.nextInt(height));
+
+      RoadEdge.TYPE type = RoadEdge.TYPE.WIDE;
+      int roadEdgeTypeIndex = rand.nextInt(3);
+      if(roadEdgeTypeIndex == 0) {
+        type = RoadEdge.TYPE.NARROW;
+      } else if(roadEdgeTypeIndex == 1) {
+        type = RoadEdge.TYPE.NORMAL;
+      }
+
+      roads.add(new RoadEdge(type, from , to));
+    }
+
+    return createRoadImage(width, height, roads);
   }
 
 }
