@@ -19,6 +19,14 @@ public class RoadEdge {
     this.width = setWidth(type);
   }
 
+  public RoadEdge(TYPE type, Vec2 from, Vec2 to) {
+    this.type = type;
+    this.from = from;
+    this.to = to;
+    this.direction = calcDirection(from, to);
+    this.width = setWidth(type);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
