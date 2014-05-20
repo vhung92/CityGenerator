@@ -11,14 +11,6 @@ public class RoadEdge {
   private Vec2 to; // position in x, y coordinates
   private Vec2 direction; // normalized 2D vector
 
-  public RoadEdge(TYPE type, Vec2 from, Vec2 to, Vec2 direction) {
-    this.type = type;
-    this.from = from;
-    this.to = to;
-    this.direction = calcDirection(from, to);
-    this.width = setWidth(type);
-  }
-
   public RoadEdge(TYPE type, Vec2 from, Vec2 to) {
     this.type = type;
     this.from = from;
