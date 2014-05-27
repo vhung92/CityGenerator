@@ -17,16 +17,11 @@ public class Main {
     BufferedImage populationMap = ImageHandler.loadImg(IMG_POPULATION);
     BufferedImage roadMap = roadGenerator.generateRoad(heightMap, populationMap);
 
+    // DEBUG: Create a random map
     roadMap = roadGenerator.testCreateRoadImage(100);
 
-    /*
     // Write the image to disk
-    try {
-      ImageIO.write(roadMap, "JPEG", new File("maps/roads.jpg"));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    */
+    ImageHandler.writeImg(roadMap, "maps/roads.jpg");
 
     // Testing L-system
     ProductionManager pm = new ProductionManager();

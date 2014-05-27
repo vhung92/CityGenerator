@@ -17,4 +17,12 @@ public class ImageHandler {
     }
     return img;
   }
+
+  public static void writeImg(BufferedImage img, String imgPath) {
+    try {
+      ImageIO.write(img, "JPEG", new File(imgPath));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 }

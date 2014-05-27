@@ -88,9 +88,9 @@ public class RoadGenerator {
     // Create small roads, to fill the rest
 
 
-    ArrayList<RoadNode> roadNodes = new ArrayList<RoadNode>();
+    ArrayList<RoadNode> roadNodes = new ArrayList<>();
 
-    Set<PopulationNode> populationNodes = new TreeSet<PopulationNode>();
+    Set<PopulationNode> populationNodes = new TreeSet<>();
 
     for(int y = 0; y < population.length; y++) {
       for(int x = 0; x < population[y].length; x++) {
@@ -102,13 +102,6 @@ public class RoadGenerator {
         }
       }
     }
-
-    System.out.println(populationNodes.size());
-    Iterator<PopulationNode> it = populationNodes.iterator();
-    for(PopulationNode pn : populationNodes) {
-      System.out.println(pn.position.x + " " + pn.position.y);
-    }
-
 
     return roads;
   }
