@@ -51,6 +51,7 @@ public class RoadGenerator {
 
             // The the population size based on the population map
             int size = (c.getRed() + c.getGreen() + c.getBlue()) / 3; // Average grayscale
+
             population[y][x] = size;
           }
         }
@@ -75,21 +76,9 @@ public class RoadGenerator {
    */
   private Set<RoadEdge> generateRoadSegments(double seed, int[][] geography, int[][] population) {
 
-    Set<RoadEdge> roads = new HashSet<RoadEdge>();
+    Set<RoadEdge> roads = new HashSet<>();
 
-    // TODO - Finish the implementation.
-
-    // Find a start position
-
-    // Create large roads, between high population locations
-
-    // Create medium roads, that cannot be too close to each other
-
-    // Create small roads, to fill the rest
-
-
-    ArrayList<RoadNode> roadNodes = new ArrayList<>();
-
+    // Find starting points based on populated areas
     Set<PopulationNode> populationNodes = new TreeSet<>();
 
     for(int y = 0; y < population.length; y++) {
@@ -102,6 +91,14 @@ public class RoadGenerator {
         }
       }
     }
+
+    // Create large roads, between high population locations
+
+
+    // Create medium roads, that cannot be too close to each other
+
+
+    // Create small roads, to fill the rest
 
     return roads;
   }
