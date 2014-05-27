@@ -19,16 +19,15 @@ public class ProductionManager {
     rulesMap.put(pr.getPredecessor(), pr.getSuccessor());
   }
 
-  public Axiom applyRules(Axiom a){
-    String seq = a.getSeqence();
+  public String applyRule(String a){
     StringBuilder stringBuilder = new StringBuilder();
-    for(int i = 0; i < seq.length(); i++) {
-      if (rulesMap.containsKey("" + seq.charAt(i))) {
-        stringBuilder.append(rulesMap.get("" + seq.charAt(i)));
+    for(int i = 0; i < a.length(); i++) {
+      if (rulesMap.containsKey("" + a.charAt(i))) {
+        stringBuilder.append(rulesMap.get("" + a.charAt(i)));
       } else {
-        stringBuilder.append("" + seq.charAt(i));
+        stringBuilder.append("" + a.charAt(i));
       }
     }
-    return new Axiom(stringBuilder.toString());
+    return stringBuilder.toString();
   }
 }

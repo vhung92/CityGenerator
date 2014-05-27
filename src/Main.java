@@ -31,10 +31,10 @@ public class Main {
     pm.addRule(pr1);
     pm.addRule(pr2);
 
-    Axiom a = new Axiom("a");
+    String a = "a";
     for(int i = 0; i < 5; i++){
-      System.out.println(a.getSeqence());
-      a = pm.applyRules(a);
+      System.out.println(a);
+      a = pm.applyRule(a);
     }
   }
 }
