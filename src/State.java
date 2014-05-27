@@ -31,9 +31,14 @@ public class State {
   }
 
   public void saveState(){
-    pointStack.push(currentPosition);
-    directionStack.push(direction);
-    angleStack.push(angle);
+    Point oldPos = new Point(currentPosition);
+    pointStack.push(oldPos);
+
+    Vec2 oldDir = direction;
+    directionStack.push(oldDir);
+
+    float oldAngle = angle;
+    angleStack.push(oldAngle);
   }
 
   public void restoreState(){

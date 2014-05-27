@@ -34,6 +34,9 @@ class Point
     public Point()
     {
     }
+    public Point(Point other){
+      setPoint(other.x, other.y);
+    }
 
     public void setPoint(double x, double y)
     {

@@ -12,6 +12,12 @@ public class Vec2 {
     this.y = y;
   }
 
+  public Vec2(Vec2 other){
+    this.x = other.x;
+    this.y = other.y;
+    this.length = other.length;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
