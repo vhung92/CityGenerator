@@ -14,9 +14,9 @@ public class RoadGenerator {
   private final double S_STREET_MIN_DISTANCE = 25.0d; // in pixels
   private final double L_SYSTEM_SEED = 1.0d;
 
-  private final int ROAD_WIDTH_WIDE = 10;
-  private final int ROAD_WIDTH_NORMAL = 8;
-  private final int ROAD_WIDTH_NARROW = 5;
+  private final int ROAD_WIDTH_WIDE = 5;
+  private final int ROAD_WIDTH_NORMAL = 3;
+  private final int ROAD_WIDTH_NARROW = 2;
 
   public RoadGenerator() {
   }
@@ -42,24 +42,28 @@ public class RoadGenerator {
 
         // Check for geographical conditions on this pixel
         Color c = new Color(heightMap.getRGB(x, y));
-        if(c.getRed() > 0 || c.getGreen() > 0 || c.getBlue() < 0) {
+        if(c.getRed() > 0 || c.getGreen() > 0 || c.getBlue() > 0) {
           geography[y][x] = 1;
 
           // If roads can be built on this pixel, check for population conditions
           c = new Color(populationMap.getRGB(x, y));
-          if(c.getRed() > 0 || c.getGreen() > 0 || c.getBlue() < 0) {
-            population[y][x] = 1;
+          if(c.getRed() > 0 || c.getGreen() > 0 || c.getBlue() > 0) {
+
+            // The the population size based on the population map
+            int size = (c.getRed() + c.getGreen() + c.getBlue()) / 3; // Average grayscale
+            population[y][x] = size;
           }
         }
       }
     }
 
     // Variable storing all road segments
-    generateRoadSegments(L_SYSTEM_SEED, geography, population);
+    Set<RoadEdge> roadEdges = generateRoadSegments(L_SYSTEM_SEED, geography, population);
 
     // Draw an image given the set of RoadSegments
+    BufferedImage roadImg = createRoadImage(width, height, roadEdges);
 
-    return null;
+    return roadImg;
   }
 
   /**
@@ -86,44 +90,24 @@ public class RoadGenerator {
 
     ArrayList<RoadNode> roadNodes = new ArrayList<RoadNode>();
 
-    int maxCityArea = 10;
+    Set<PopulationNode> populationNodes = new TreeSet<PopulationNode>();
 
-    boolean foundPopulation = false;
     for(int y = 0; y < population.length; y++) {
       for(int x = 0; x < population[y].length; x++) {
-        if(population[y][x] > 0) {
 
-          System.out.println("Found a population. X: " + x + " Y: " + y);
+        int size = population[y][x];
 
-          boolean alreadyFoundCity = false;
-
-          for(int yPopulation = y; yPopulation >= 0 && yPopulation > (y - maxCityArea); yPopulation--) {
-            for(int xPopulation = x; xPopulation >= 0 && xPopulation > (x - maxCityArea); xPopulation--) {
-              if(population[yPopulation][xPopulation] > 0) {
-                alreadyFoundCity = true;
-                break;
-              }
-            }
-            if(alreadyFoundCity) {
-              break;
-            }
-          }
-
-          if(!alreadyFoundCity) {
-            roadNodes.add(new RoadNode(new Vec2(x, y)));
-          }
+        if(size > 0) {
+          populationNodes.add(new PopulationNode(new Vec2(x, y), size));
         }
       }
     }
 
-
-
-    System.out.println(roadNodes.size());
-
-
-
-
-
+    System.out.println(populationNodes.size());
+    Iterator<PopulationNode> it = populationNodes.iterator();
+    for(PopulationNode pn : populationNodes) {
+      System.out.println(pn.position.x + " " + pn.position.y);
+    }
 
 
     return roads;
