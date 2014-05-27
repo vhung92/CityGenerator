@@ -18,7 +18,7 @@ public class Main {
     BufferedImage populationMap = ImageHandler.loadImg(IMG_POPULATION);
     BufferedImage roadMap = roadGenerator.generateRoad(heightMap, populationMap);
 
-    roadMap = roadGenerator.testCreateRoadImage(100);
+    roadMap = roadGenerator.testCreateRoadImage(200);
 
 
     // Write the image to disk

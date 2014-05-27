@@ -5,7 +5,6 @@ public class Vec2 {
 
   public double x;
   public double y;
-  public double length;
 
   public Vec2(double x, double y) {
     this.x = x;
@@ -37,8 +36,12 @@ public class Vec2 {
   }
 
   public void normalize() {
-    length = Math.sqrt(x * x + y * y);
+    double length = Math.sqrt(x * x + y * y);
     x /= length;
     y /= length;
+  }
+
+  public static double distance(Vec2 to, Vec2 from) {
+    return Math.sqrt(Math.pow((from.x - to.x), 2) + Math.pow((from.y - to.y), 2));
   }
 }
