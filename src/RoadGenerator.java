@@ -115,7 +115,7 @@ public class RoadGenerator {
     Color bgColor = Color.WHITE;
     Color roadColor = Color.BLACK;
 
-    BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+    BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
 
     Graphics2D g = img.createGraphics();
     g.setColor(bgColor);

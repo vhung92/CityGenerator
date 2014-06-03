@@ -31,7 +31,7 @@ public class Main {
     pm.addRule(pr1);
     pm.addRule(pr2);
 
-    String a = "a";
+    String a = "ab";
     for(int i = 0; i < 5; i++){
       System.out.println(a);
       a = pm.applyRule(a);
