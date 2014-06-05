@@ -14,7 +14,7 @@ public class Main {
 		// Height map
 		for(int i = 0; i < heightMap.length; i++) {
 			for(int j = 0; j < heightMap[i].length; j++) {
-				heightMap[i][j] = 0; // may build if 1
+				heightMap[i][j] = 0; // may build if 0
 			}
 		}
 		
