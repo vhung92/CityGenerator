@@ -5,13 +5,13 @@
 public class BModule {
   private final String SYMBOL = "B";
 
-  private int delay = 0;
+  private int delay;
 
-  public BModule(int delay){
-    this.delay = delay;
-  }
+  public BModule(){}
 
   public void setDelay(int delay){
     this.delay = delay;
   }
+
+  public int getDelay(){ return delay; }
 }

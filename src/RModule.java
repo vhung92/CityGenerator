@@ -5,23 +5,19 @@
 public class RModule {
   private final String SYMBOL = "R";
 
-  private int length = 0;
-  private float angle = 0;
+  private int length;
+  private float angle;
 
 
   public RModule(){
   }
 
-  public RModule(int length, float angle){
+  public void setAttributes(int length, float angle){
     this.length = length;
     this.angle = angle;
   }
 
-  public void setLength(int length){
-    this.length = length;
-  }
+  public int getLength(){ return length; }
 
-  public void setAngle(float angle){
-    this.angle = angle;
-  }
+  public float getAngle(){ return angle; }
 }
