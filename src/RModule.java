@@ -5,19 +5,17 @@
 public class RModule {
   private final String SYMBOL = "R";
 
-  private int length;
-  private float angle;
+  private RoadAttributes roadAttributes;
 
+  private int delay;
 
-  public RModule(){
+  public RModule(int delay, RoadAttributes rl){
+    this.delay=delay;
+    roadAttributes =rl;
   }
 
-  public void setAttributes(int length, float angle){
-    this.length = length;
-    this.angle = angle;
-  }
+  public int getDelay(){ return delay; }
+  public void setDelay(int delay){ this.delay=delay; }
 
-  public int getLength(){ return length; }
-
-  public float getAngle(){ return angle; }
+  public RoadAttributes getRoadAttributes(){ return roadAttributes; }
 }
